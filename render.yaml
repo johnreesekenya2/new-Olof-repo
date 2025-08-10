@@ -1,0 +1,23 @@
+
+services:
+  - type: web
+    name: olof-alumni-app
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: olof-alumni-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PORT
+        value: 10000
+
+databases:
+  - name: olof-alumni-db
+    databaseName: olof_alumni
+    user: olof_user
